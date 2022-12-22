@@ -1,4 +1,4 @@
-import { DateTime, Interval } from "./luxon.js";
+import { DateTime } from "./luxon.js";
 import { formatError } from "./utils.js";
 import { diffToHtml } from "./datecalc.js";
 

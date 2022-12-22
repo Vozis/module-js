@@ -1,4 +1,4 @@
-import { DateTime, Duration } from "./luxon.js";
+import { DateTime } from "./luxon.js";
 
 export function chekDates(firstDate, secondDate) {
   let minDate = DateTime.fromISO(firstDate);

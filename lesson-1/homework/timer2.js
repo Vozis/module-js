@@ -2,7 +2,7 @@ import { DateTime } from "./luxon.js";
 import { formatError } from "./utils.js";
 import { diffToHtml } from "./datecalc.js";
 
-export function getTimer(event) {
+export function getTimer(event, element) {
   const [inputEl, _, buttonPause, buttonResume] = event.target.elements;
   let firstDate = DateTime.fromISO(inputEl.value);
 
@@ -11,13 +11,13 @@ export function getTimer(event) {
 
   if (!firstDate.isValid) {
     console.log("input is invalid");
-    event.value = formatError("Некеорректные исхожные данные.");
+    element.innerHTML = formatError("Некеорректные исхожные данные.");
     return;
   }
 
   function newTimer() {
     console.log("timer work");
-    event.value = "";
+    element.innerHTML = "";
     const secondDate = DateTime.local();
     diff = firstDate.diff(secondDate, [
       "years",
@@ -30,10 +30,10 @@ export function getTimer(event) {
 
     if (diff.as("milliseconds") <= 0) {
       console.log("timer end");
-      event.value = formatError("Таймер истек.");
+      element.innerHTML = formatError("Таймер истек.");
       clearInterval(timer);
     } else {
-      event.value = diffToHtml(diff);
+      element.innerHTML = diffToHtml(diff);
     }
   }
 
@@ -62,10 +62,10 @@ export function getTimer(event) {
 
       if (diff.as("milliseconds") <= 0) {
         console.log("timer end");
-        event.value = formatError("Таймер истек.");
+        element.innerHTML = formatError("Таймер истек.");
         clearInterval(timer);
       } else {
-        event.value = diffToHtml(diff);
+        element.innerHTML = diffToHtml(diff);
       }
     }, 1000);
   });
